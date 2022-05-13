@@ -10,7 +10,7 @@ export const Empregado = () => {
   const [departamento, setDepartamento] = useState("");
   const [dataIngressao, setDataIngressao] = useState("");
   const [nomeFoto, setNomeFoto] = useState("anonymous.png");
-  const [photoPath, setPhotoPath] = useState(variables.PHOTO_URL);
+  const [photoPath] = useState(variables.PHOTO_URL);
 
   function refreshList() {
     fetch(variables.API_URL + "empregado")

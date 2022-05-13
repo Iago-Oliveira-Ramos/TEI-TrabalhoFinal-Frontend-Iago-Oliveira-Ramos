@@ -101,36 +101,31 @@ export const Departamento = () => {
     }
   }
 
-  const changeDepartmentIdFilter = (e) => {
-    setIdFiltro(e.target.value);
-    FilterFn();
-  };
-  const changeDepartmentNameFilter = (e) => {
-    this.state.DepartmentNameFilter = e.target.value;
-    this.FilterFn();
-  };
-
-  function FilterFn() {
-    var IdFiltro = idFiltro;
-    var NomeFiltro = nomeFiltro;
-
-    var FilteredData = semFiltro.filter(function (el) {
-      return (
-        el.DepartamentoId.toString()
-          .toLowerCase()
-          .includes(IdFiltro.toString().trim().toLowerCase) &&
-        el.DepartamentoNome.toString()
-          .toLowerCase()
-          .includes(NomeFiltro.toString().trim().toLowerCase)
-      );
-    });
-
-    setDepartamentos(FilteredData);
-  }
-
   useEffect(() => {
     refreshList();
   }, []);
+
+  useEffect(() => {
+    function FilterFn() {
+      var IdFiltro = idFiltro;
+      var NomeFiltro = nomeFiltro;
+
+      var FilteredData = semFiltro.filter(function (el) {
+        return (
+          el.DepartamentoId.toString()
+            .toLowerCase()
+            .includes(IdFiltro.toString().trim().toLowerCase()) &&
+          el.DepartamentoNome.toString()
+            .toLowerCase()
+            .includes(NomeFiltro.toString().trim().toLowerCase())
+        );
+      });
+
+      setDepartamentos(FilteredData);
+    }
+
+    FilterFn();
+  }, [idFiltro, nomeFiltro, semFiltro]);
 
   return (
     <div>
@@ -149,7 +144,9 @@ export const Departamento = () => {
             <th>
               <input
                 className="form-control m-2"
-                onChange={(e) => changeDepartmentIdFilter(e)}
+                onChange={(e) => {
+                  setIdFiltro(e.target.value);
+                }}
                 placeholder="Filtro"
               />
               ID Departamento
@@ -159,7 +156,6 @@ export const Departamento = () => {
                 className="form-control m-2"
                 onChange={(e) => {
                   setNomeFiltro(e.target.value);
-                  FilterFn();
                 }}
                 placeholder="Filtro"
               />
