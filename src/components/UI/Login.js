@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import { App } from "../../App";
 import "../../App.css";
+import { variables } from "../../Variables";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { NavBar } from "../NavBar";
 
-export const Login = ({ root }) => {
+export const Login = () => {
+  const [usuarios, setUsuarios] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  let acesso = false;
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -11,6 +19,40 @@ export const Login = ({ root }) => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  const handleLogin = () => {
+    usuarios.map((user) => {
+      if (username === user.Login && password === user.Senha) {
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(
+          <React.StrictMode>
+            <BrowserRouter>
+              <NavBar username={username} />
+            </BrowserRouter>
+          </React.StrictMode>
+        );
+
+        localStorage.setItem("usuario", username);
+        acesso = true;
+      }
+    });
+
+    return acesso ? alert("Acesso autorizado!") : alert("Acesso negado!");
+  };
+
+  const getData = () => {
+    fetch(variables.API_URL + "usuario")
+      .then((response) => response.json())
+      .then((data) => setUsuarios(data));
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("loggedIn", true);
+  }, [acesso]);
 
   return (
     <Form
@@ -28,11 +70,19 @@ export const Login = ({ root }) => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
       style={{
-        paddingTop: "150px",
+        paddingTop: "2%",
         backgroundColor: "#EFEBE9",
         height: "89.5vh",
       }}
     >
+      <Form.Item wrapperCol={{ offset: 11 }}>
+        <img
+          className="logo"
+          src={require("../../assets/ic_launcher-web.png")}
+          alt="Logo do sistema de cadastro"
+          style={{ width: "200px", heigth: "200px" }}
+        />
+      </Form.Item>
       <Form.Item
         label="Usuário"
         name="username"
@@ -44,7 +94,11 @@ export const Login = ({ root }) => {
         ]}
         style={{ paddingLeft: "22px" }}
       >
-        <Input style={{ width: "585px" }} />
+        <Input
+          style={{ width: "585px" }}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item
@@ -57,7 +111,11 @@ export const Login = ({ root }) => {
           },
         ]}
       >
-        <Input.Password style={{ width: "585px" }} />
+        <Input.Password
+          style={{ width: "585px" }}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item
@@ -80,18 +138,12 @@ export const Login = ({ root }) => {
         <Button
           type="primary"
           htmlType="submit"
-          onClick={() =>
-            root.render(
-              <React.StrictMode>
-                <App />
-              </React.StrictMode>
-            )
-          }
           style={{
             width: "150px",
             height: "40px",
             paddingRight: "27px",
           }}
+          onClick={() => handleLogin()}
         >
           Entrar
         </Button>

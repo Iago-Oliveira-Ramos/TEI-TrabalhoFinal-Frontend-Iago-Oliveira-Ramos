@@ -140,7 +140,7 @@ export const Empregado = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingTop: 40, paddingLeft: 20, paddingRight: 20 }}>
       <button
         type="button"
         className="btn btn-primary m-2 float-end"

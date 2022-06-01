@@ -1,12 +1,15 @@
+import { useEffect } from "react";
 import "./App.css";
 import { NavBar } from "./components/NavBar";
+import { Sidebar } from "./components/Sidebar";
 
 export const App = () => {
-  return (
-    <div className="App container">
-      <h3 className="d-flex justify-content-center m-3">Sistema de Cadastro</h3>
+  useEffect(() => {
+    localStorage.setItem("loggedIn", false);
+  }, []);
 
-      <NavBar />
-    </div>
-  );
+  const loggedIn = localStorage.getItem("loggedIn");
+  console.log(loggedIn);
+
+  return <>{loggedIn === "false" ? <Sidebar /> : <NavBar />}</>;
 };

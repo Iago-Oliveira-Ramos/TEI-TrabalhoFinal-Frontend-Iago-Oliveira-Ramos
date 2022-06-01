@@ -9,6 +9,8 @@ import { Login } from "../components/UI/Login";
 
 import "./Sidebar.css";
 import { Cadastro } from "./Cadastro";
+import { Logo } from "./Logo";
+import { NavBar } from "./NavBar";
 
 export const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -22,6 +24,7 @@ export const Sidebar = () => {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={() => showSidebar()} />
           </Link>
+          <div className="titulo">SISTEMA DE CADASTRO</div>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={() => showSidebar()}>
@@ -45,8 +48,10 @@ export const Sidebar = () => {
       </IconContext.Provider>
 
       <Routes>
+        <Route path={"*"} element={<Logo />} />
         <Route path={"/login"} element={<Login />} />
         <Route path={"/cadastro"} element={<Cadastro />} />
+        <Route path={"/navbar"} element={<NavBar />} />
       </Routes>
     </>
   );

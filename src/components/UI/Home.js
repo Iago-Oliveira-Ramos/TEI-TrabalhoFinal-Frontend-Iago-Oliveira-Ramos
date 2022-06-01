@@ -1,61 +1,50 @@
 export const Home = () => {
   return (
-    <div>
-      <div
-        style={{
-          backgroundColor: "lightblue",
-          borderRadius: "50px",
-          boxShadow: "2px 2px 1px",
-        }}
-      >
-        <b>
-          <i>Candidato:</i>
-        </b>{" "}
-        Iago Oliveira Ramos <br />
-        <br />
-        <b>
-          <i>Objetivo:</i>
-        </b>{" "}
-        Criar um CRUD em .NET Core com front end em React ou JavaScript,
-        salvando em SQL.
-        <br />
-        <br />
-        <b>
-          <i>Projeto:</i>
-        </b>{" "}
-        Sistema de cadastro simples de departamentos e empregados.
-        <br />
-        <br />
-        <b>
-          <i>Prazo:</i>
-        </b>{" "}
-        22/02/2022 <br />
-        <br />
-        <br />
-        <b>
-          <i>Descrição:</i>
-        </b>{" "}
-        O programa permite inserir, atualizar e deletar departamentos e
-        empregados.
-        <br />
-        Também é possível filtrar e ordenar departamentos e escolher um arquivo
-        de imagem para o empregado.
+    <div className="container mt-4">
+      <div className="jumbotron">
+        <img
+          src={require("../../assets/Pic.jpg")}
+          alt="Foto do desenvolvedor"
+          style={{
+            float: "right",
+            width: 250,
+            heigth: 260,
+            borderRadius: 20,
+          }}
+        />
+        <h1 className="display-4">Iago Oliveira Ramos</h1>
+
+        <h3>RA: 2840 4819 11019</h3>
+        <p style={{ fontStyle: "italic" }}>Tecnologias Utilizadas</p>
+        <p className="lead">
+          <a style={{ color: "#23A6EC" }}>React</a>
+          <br />
+          <a style={{ color: "#23A6EC" }}>Python Django</a>
+          <br />
+          <a style={{ color: "#23A6EC" }}>SQLite</a>
+        </p>
+        <hr className="my-4" />
+        <p style={{ fontSize: 20 }}>
+          <b>Tema escolhido:</b> Sistema de cadastro de departamentos e
+          empregados.
+        </p>
+
+        <p style={{ fontSize: 20 }}>
+          <b>Objetivo:</b> Desenvolver um sistema fullstack integrado a um banco
+          de dados para realizar o CRUD dos dados nas tabelas.
+        </p>
         <br />
         <br />
-        <b>
-          <i>Tecnologias utilizadas:</i>
-        </b>{" "}
-        SQL, .NET Core, React, Node.js, Bootstrap.
-        <br />
-        <br />
-        <b>
-          <i>IDEs utilizadas:</i>
-        </b>{" "}
-        SQL Server Management Studio, Visual Studio 2019, VSCode.
-        <br />
-        <br />
+        <p style={{ fontSize: 16 }}>
+          <b>Disciplina:</b> Tópicos Essenciais em Informática
+        </p>
+        <p style={{ fontSize: 16 }}>
+          <b>Semestre:</b> 6º Semestre, manhã
+        </p>
+        <p style={{ fontSize: 16 }}>
+          <b>Professor:</b> Fabricio Gustavo Henrique
+        </p>
       </div>
-      <br></br>
     </div>
   );
 };

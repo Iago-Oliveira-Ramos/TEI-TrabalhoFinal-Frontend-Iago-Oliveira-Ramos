@@ -15,6 +15,13 @@
   align-items: center;
 }
 
+.titulo {
+  margin-left: 50px;
+  font-size: 40px;
+  font-style: italic;
+  color: #fff;
+}
+
 .menu-bars {
   margin-left: 2rem;
   font-size: 2rem;
